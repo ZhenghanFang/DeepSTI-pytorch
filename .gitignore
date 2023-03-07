@@ -1,0 +1,11 @@
+# ignore archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+.ipynb_checkpoints
+__pycache__/
+.DS_Store
+*.DS_Store*
+

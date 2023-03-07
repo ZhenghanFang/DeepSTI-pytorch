@@ -1,0 +1,17 @@
+- name: data name, e.g. Sub001_Ori001
+  tesla: 3
+  phase:
+  - measurement at 1st orientation, nii.gz
+  H0:
+  - angle of 1st orientation, txt
+  mask: brain mask, nii.gz
+
+- name: Sub001_Ori001-Ori002
+  tesla: 3
+  phase:
+  - measurement at 1st orientation, nii.gz
+  - measurement at 2nd orientation, nii.gz
+  H0:
+  - angle of 1st orientation, txt
+  - angle of 2nd orientation, txt
+  mask: brain mask, nii.gz

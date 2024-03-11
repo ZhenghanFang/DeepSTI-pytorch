@@ -78,6 +78,6 @@ If you find the code useful for your research, please consider citing
   pages={102829},
   year={2023},
   publisher={Elsevier},
-  doi = {https://doi.org/10.1016/j.media.2023.102829}
+  doi={https://doi.org/10.1016/j.media.2023.102829}
 }
 ```

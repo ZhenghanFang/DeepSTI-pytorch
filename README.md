@@ -1,8 +1,10 @@
 
-# DeepSTI
-[Arxiv](https://arxiv.org/abs/2209.04504 "Arxiv")
+# DeepSTI: Towards Tensor Reconstruction using Fewer Orientations in Susceptibility Tensor Imaging
+This is the official implementation of the paper
 
-### Official PyTorch implementation of the paper "DeepSTI: Towards Tensor Reconstruction using Fewer Orientations in Susceptibility Tensor Imaging" [Arxiv](https://arxiv.org/abs/2209.04504 "Arxiv")
+[DeepSTI: Towards Tensor Reconstruction using Fewer Orientations in Susceptibility Tensor Imaging](https://www.sciencedirect.com/science/article/pii/S1361841523000890). *Medical Image Analysis* 2023.
+
+by Zhenghan Fang, Kuo-Wei Lai, Peter van Zijl, Xu Li, and [Jeremias Sulam](https://sites.google.com/view/jsulam).
 
 ## Requirements
 - [Python 3.9](https://www.python.org/)
@@ -27,7 +29,7 @@ python deepsti/main.py
 arguments:
 --mode                        train (train or predict)
 --name                        name of your experiment
---data                        path to dataset directory
+--data_dir                    path to dataset directory
 --train_list                  list of training data
 --validate_list               list of validation data
 --test_list                   list of testing data
@@ -37,7 +39,7 @@ arguments:
 ```
 Example:
 ```
-python deepsti/main.py --mode train --name myexp --data data/ --train_list train.txt --validate_list validate.txt --test_list test.txt --gpu 0,1
+python deepsti/main.py --mode train --name myexp --data_dir data/ --train_list train.txt --validate_list validate.txt --test_list test.txt --gpu 0,1
 ```
 #### Tensorboard Visualization
 ```
@@ -64,3 +66,18 @@ Predictions will be saved in ```experiment/results```.
 Demo data will be provided shortly.
 
 
+## References
+
+If you find the code useful for your research, please consider citing
+```bib
+@article{fang2023deepsti,
+  title={Deepsti: towards tensor reconstruction using fewer orientations in susceptibility tensor imaging},
+  author={Fang, Zhenghan and Lai, Kuo-Wei and van Zijl, Peter and Li, Xu and Sulam, Jeremias},
+  journal={Medical image analysis},
+  volume={87},
+  pages={102829},
+  year={2023},
+  publisher={Elsevier},
+  doi = {https://doi.org/10.1016/j.media.2023.102829}
+}
+```

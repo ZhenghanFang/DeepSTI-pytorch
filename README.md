@@ -4,7 +4,9 @@ This is the official implementation of the paper
 
 [DeepSTI: Towards Tensor Reconstruction using Fewer Orientations in Susceptibility Tensor Imaging](https://www.sciencedirect.com/science/article/pii/S1361841523000890). *Medical Image Analysis* 2023.
 
-by Zhenghan Fang, Kuo-Wei Lai, Peter van Zijl, Xu Li, and [Jeremias Sulam](https://sites.google.com/view/jsulam).
+by [Zhenghan Fang](https://zhenghanfang.github.io/), Kuo-Wei Lai, Peter van Zijl, Xu Li, and [Jeremias Sulam](https://sites.google.com/view/jsulam).
+
+<img src='assets/deepsti_animation_7T_4ori.gif' style="width: 50%">
 
 ## Requirements
 - [Python 3.9](https://www.python.org/)

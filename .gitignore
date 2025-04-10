@@ -1,3 +1,6 @@
+experiment/
+data/
+
 # ignore archives
 *.zip
 *.tar

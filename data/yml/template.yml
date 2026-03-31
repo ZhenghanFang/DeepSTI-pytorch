@@ -1,7 +1,7 @@
-- name: data name, e.g. Sub001_Ori001
+- name: saved file name prefix, e.g. Sub001_Ori001
   tesla: 3
   phase:
-  - measurement at 1st orientation, nii.gz
+  - phase measurement at 1st orientation, nii.gz, in Hz
   H0:
   - angle of 1st orientation, txt
   mask: brain mask, nii.gz

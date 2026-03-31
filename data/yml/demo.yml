@@ -1,0 +1,21 @@
+- name: Sub006_4ori
+  tesla: 7
+  phase:
+  - data/test/Sub006/Ori001/Sub006_Ori001_phase.nii.gz
+  - data/test/Sub006/Ori002/Sub006_Ori002_phase.nii.gz
+  - data/test/Sub006/Ori003/Sub006_Ori003_phase.nii.gz
+  - data/test/Sub006/Ori004/Sub006_Ori004_phase.nii.gz
+  H0:
+  - data/test/Sub006/Ori001/Sub006_Ori001_ang.txt
+  - data/test/Sub006/Ori002/Sub006_Ori002_ang.txt
+  - data/test/Sub006/Ori003/Sub006_Ori003_ang.txt
+  - data/test/Sub006/Ori004/Sub006_Ori004_ang.txt
+  mask: data/test/Sub006/sti/Sub006_mask.nii.gz
+
+- name: Sub006_1ori
+  tesla: 7
+  phase:
+  - data/test/Sub006/Ori001/Sub006_Ori001_phase.nii.gz
+  H0:
+  - data/test/Sub006/Ori001/Sub006_Ori001_ang.txt
+  mask: data/test/Sub006/sti/Sub006_mask.nii.gz

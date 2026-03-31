@@ -22,7 +22,7 @@ def parse_args():
     parser.add_argument('--random_nori', type=lambda x: bool(int(x)), default=True, help='randomly downsample number of orientations (choose from 1~6) during training. 0: False; other: True. default: True.')
     parser.add_argument('--num_epoch', default=500, type=int, help='number of epochs to run (default: 500)')
     parser.add_argument('--samples_per_epoch', type=int, default=2000, help='how many samples per epoch')
-    
+    parser.add_argument('--output_path', type=str, default='./experiment/results/', help='output path')
     
     # network arguments
     parser.add_argument('--feat_dim', default=64, type=int, help='network parameter, feature dimension (default: 64)')

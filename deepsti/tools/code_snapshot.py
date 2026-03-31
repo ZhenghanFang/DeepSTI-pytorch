@@ -13,7 +13,7 @@ def code_snapshot(dstDir, argv):
     
     extension = '.py'
     exclude = ['.ipynb_checkpoints']
-    srcDir = '.'
+    srcDir = './deepsti/'
     for root, dirs, files in os.walk(srcDir):
         for file_ in files:
             if file_.endswith(extension) and not_in(root, exclude) and (len(root.split('/')) == 1 or root.split('/')[1] != 'snapshots'):

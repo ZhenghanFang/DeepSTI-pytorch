@@ -71,12 +71,14 @@ Example:
 ```
 python deepsti/main.py --mode predict --resume_file pretrained/deepsti.pkl --gpu 0 --ext_data data/yml/demo.yml --output_path experiment/results
 ```
-Predictions will be saved to `experiment/results`, with naming convention `[name]_pred_{sti,avg,ani,V1,modpev}.nii.gz`, where `name` is defined in the input yml file. The outputs are:
+Predictions will be saved to `output_path`, with naming convention `[name]_pred_{sti,avg,ani,V1,modpev}.nii.gz`, where `name` is defined in the input yml file. The outputs are:
 - `sti`: 6-channel tensor image, ordered as [xx, xy, xz, yy, yz, zz]
 - `avg`: mean magnetic susceptibility
 - `ani`: magnetic susceptibility anisotropy
 - `V1`: principal eigenvector of the susceptibility tensor
 - `modpev`: principal eigenvector map modulated by the predicted susceptibility anisotropy
+
+Example outputs from DeepSTI are provided in `results/`.
 
 ## Dataset
 Demo data for inference is available at `data/test/`. See the "Test on External Data" section for how to run the pretrained model on this example dataset.

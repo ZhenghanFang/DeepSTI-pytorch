@@ -29,10 +29,9 @@ conda activate [MY_ENV]
 
 ### Train
 ```
-python deepsti/main.py 
+python deepsti/main.py --mode train
 
 arguments:
---mode                        train (train or predict)
 --name                        name of your experiment
 --data_dir                    path to dataset directory
 --train_list                  list of training data
@@ -56,12 +55,11 @@ tensorboard --logdir experiment/tb_log/deepsti_resunet_myexp
 Download the pretrained checkpoint [`deepsti.pkl` here](https://huggingface.co/ZhenghanFang/DeepSTI-pytorch/tree/main) and save it as `pretrained/deepsti.pkl`.
 
 
-### Test on External Data
+### Test on Your Own Data
 ```
-python deepsti/main.py
+python deepsti/main.py --mode predict
 
 arguments:
---mode                        predict (train or predict)
 --resume_file                 saved model parameters
 --ext_data                    yml file of external data information
 --gpu                         GPU ID's, e.g. "0" or "0,1"

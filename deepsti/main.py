@@ -438,32 +438,35 @@ def predict(args, device, model, data_loader, model_name, prediction_data):
                     * mask[:, :, :, np.newaxis]
                 )
 
-            print("computing metrics...")
-            mse_val = stet.mse_sti(og_output, og_gt, mask)
-            mse_loss += mse_val
-            psnr_val = stet.psnr_sti(og_output, og_gt, mask, data_min, data_max)
-            psnr_perf += psnr_val
-            ssim_val = stet.ssim_sti(og_gt, og_output, data_max_vec, data_min_vec)
-            ssim_perf += ssim_val
-
-            gt_L, gt_V, gt_avg, gt_ani, gt_V1, gt_modpev = stet.tensor2misc(og_gt)
-            pred_L, pred_V, pred_avg, pred_ani, pred_V1, pred_modpev = stet.tensor2misc(
-                og_output
-            )
-            vec_thr0_val = stet.evec_cos_sim_err(
-                gt_V1, pred_V1, mask, ani_m, ani_thr=0.0
-            )
-            vec_thr0_perf += vec_thr0_val
-            vec_val = stet.evec_cos_sim_err(gt_V1, pred_V1, mask, ani_m, ani_thr=0.015)
-            vec_perf += vec_val
-            wpsnr_tmp = stet.wpsnr_sti(pred_V1, pred_ani, gt_V1, gt_ani, mask)
-            wpsnr_perf += wpsnr_tmp
-
             print(sub_name[0])
-            print(
-                "##Test PSNR: %.8f SSIM: %.8f VEC: %.8f VEC(thr0): %.4f WPSNR: %.4f MSE: %.4f"
-                % (psnr_val, ssim_val, vec_val, vec_thr0_val, wpsnr_tmp, mse_val)
-            )
+            if prediction_set != "ext":
+                print("computing metrics...")
+                mse_val = stet.mse_sti(og_output, og_gt, mask)
+                mse_loss += mse_val
+                psnr_val = stet.psnr_sti(og_output, og_gt, mask, data_min, data_max)
+                psnr_perf += psnr_val
+                ssim_val = stet.ssim_sti(og_gt, og_output, data_max_vec, data_min_vec)
+                ssim_perf += ssim_val
+
+                gt_L, gt_V, gt_avg, gt_ani, gt_V1, gt_modpev = stet.tensor2misc(og_gt)
+                pred_L, pred_V, pred_avg, pred_ani, pred_V1, pred_modpev = stet.tensor2misc(
+                    og_output
+                )
+                vec_thr0_val = stet.evec_cos_sim_err(
+                    gt_V1, pred_V1, mask, ani_m, ani_thr=0.0
+                )
+                vec_thr0_perf += vec_thr0_val
+                vec_val = stet.evec_cos_sim_err(
+                    gt_V1, pred_V1, mask, ani_m, ani_thr=0.015
+                )
+                vec_perf += vec_val
+                wpsnr_tmp = stet.wpsnr_sti(pred_V1, pred_ani, gt_V1, gt_ani, mask)
+                wpsnr_perf += wpsnr_tmp
+
+                print(
+                    "##Test PSNR: %.8f SSIM: %.8f VEC: %.8f VEC(thr0): %.4f WPSNR: %.4f MSE: %.4f"
+                    % (psnr_val, ssim_val, vec_val, vec_thr0_val, wpsnr_tmp, mse_val)
+                )
 
             if not args.no_save:
                 if prediction_set == "ext":
@@ -503,24 +506,25 @@ def predict(args, device, model, data_loader, model_name, prediction_data):
 
                 sti_save(og_output, orig_nii_path, mask, out_name=save_name)
 
-        avg_mse_loss = mse_loss / len(data_loader.dataset)
-        avg_psnr_perf = psnr_perf / len(data_loader.dataset)
-        avg_ssim_perf = ssim_perf / len(data_loader.dataset)
-        avg_vec_perf = vec_perf / len(data_loader.dataset)
-        avg_vec_thr0_perf = vec_thr0_perf / len(data_loader.dataset)
-        avg_wpsnr_perf = wpsnr_perf / len(data_loader.dataset)
+        if prediction_set != "ext":
+            avg_mse_loss = mse_loss / len(data_loader.dataset)
+            avg_psnr_perf = psnr_perf / len(data_loader.dataset)
+            avg_ssim_perf = ssim_perf / len(data_loader.dataset)
+            avg_vec_perf = vec_perf / len(data_loader.dataset)
+            avg_vec_thr0_perf = vec_thr0_perf / len(data_loader.dataset)
+            avg_wpsnr_perf = wpsnr_perf / len(data_loader.dataset)
 
-        print(
-            "##Test Mse: %.8f PSNR: %.8f SSIM: %.8f VEC: %.8f VEC(thr0): %.4f WPSNR: %.8f"
-            % (
-                avg_mse_loss,
-                avg_psnr_perf,
-                avg_ssim_perf,
-                avg_vec_perf,
-                avg_vec_thr0_perf,
-                avg_wpsnr_perf,
+            print(
+                "##Test Mse: %.8f PSNR: %.8f SSIM: %.8f VEC: %.8f VEC(thr0): %.4f WPSNR: %.8f"
+                % (
+                    avg_mse_loss,
+                    avg_psnr_perf,
+                    avg_ssim_perf,
+                    avg_vec_perf,
+                    avg_vec_thr0_perf,
+                    avg_wpsnr_perf,
+                )
             )
-        )
 
 
 if __name__ == "__main__":

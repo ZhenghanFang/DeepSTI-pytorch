@@ -9,6 +9,7 @@ by [Zhenghan Fang](https://zhenghanfang.github.io/), Kuo-Wei Lai, Peter van Zijl
 <img src='assets/deepsti_animation_7T_4ori.gif' style="width: 50%">
 
 ## Updates
+- 2026-09-20: Add example training data, output montages, and the demo DTI reference.
 - 2026-03-31: Add pretrained checkpoint and demo data for testing.
 
 ## Requirements
@@ -28,6 +29,39 @@ conda activate [MY_ENV]
 ```
 
 ### Train
+
+Download the [DeepSTI synthetic training dataset](https://huggingface.co/datasets/ZhenghanFang/DeepSTI-training-data) from Hugging Face:
+
+```bash
+python -m pip install -U huggingface_hub
+
+hf download ZhenghanFang/DeepSTI-training-data \
+  --repo-type dataset \
+  --local-dir data/synthetic
+```
+
+The download already contains the training patches. They can also be recreated
+from the included whole-image arrays (the command skips existing patches):
+
+```bash
+python scripts/generate_training_patches.py --data_dir data/synthetic
+```
+
+Train DeepSTI with:
+
+```bash
+python deepsti/main.py \
+  --mode train \
+  --name default \
+  --data_dir data/synthetic \
+  --gpu 0
+```
+
+The dataset uses `Sub001`, `Sub002`, `Sub007`, `Sub008`, and `Sub009` for
+training, `Sub005` for validation, and `Sub003` and `Sub006` for testing.
+
+For a custom dataset, the training options are:
+
 ```
 python deepsti/main.py --mode train
 
@@ -69,17 +103,25 @@ Example:
 ```
 python deepsti/main.py --mode predict --resume_file pretrained/deepsti.pkl --gpu 0 --ext_data data/yml/demo.yml --output_path experiment/results
 ```
-Predictions will be saved to `output_path`, with naming convention `[name]_pred_{sti,avg,ani,V1,modpev}.nii.gz`, where `name` is defined in the input yml file. The outputs are:
+Predictions will be saved to `output_path`, with `name` in the input yml file as prefix. The outputs are:
 - `sti`: 6-channel tensor image, ordered as [xx, xy, xz, yy, yz, zz]
 - `avg`: mean magnetic susceptibility
 - `ani`: magnetic susceptibility anisotropy
 - `V1`: principal eigenvector of the susceptibility tensor
 - `modpev`: principal eigenvector map modulated by the predicted susceptibility anisotropy
 
+Mean susceptibility, anisotropy, and modPEV are saved as both NIfTI files
+and montage PNGs in the same output folder.
+
 Example outputs from DeepSTI are provided in `results/`.
 
 ## Dataset
-Demo data for inference is available at `data/test/`. See the "Test on External Data" section for how to run the pretrained model on this example dataset.
+The synthetic training, validation, and test data are available in the
+[DeepSTI training-data repository on Hugging Face](https://huggingface.co/datasets/ZhenghanFang/DeepSTI-training-data).
+The release keeps the NumPy directory layout expected by the data loader.
+
+Demo data for inference is available at `data/test/`, along with the registered DTI
+reference.
 
 To prepare your own data for inference, 
 - use LPS+ orientation for the frequency map, mask, and B0 direction
